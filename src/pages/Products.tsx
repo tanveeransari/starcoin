@@ -26,10 +26,10 @@ const products: Product[] = [
   },
   {
     id: 3,
-    name: "29000 Coins",
-    coins: 29000,
-    price: 299.99,
-    imageUrl: "/images/29000-coins.png",
+    name: "5000 Coins",
+    coins: 5000,
+    price: 49.99,
+    imageUrl: "/images/5000-coins.png",
   },
   {
     id: 4,
@@ -40,17 +40,17 @@ const products: Product[] = [
   },
   {
     id: 5,
-    name: "5000 Coins",
-    coins: 5000,
-    price: 49.99,
-    imageUrl: "/images/5000-coins.png",
-  },
-  {
-    id: 6,
     name: "10000 Coins",
     coins: 10000,
     price: 99.99,
     imageUrl: "/images/10000-coins.png",
+  },
+  {
+    id: 6,
+    name: "29000 Coins",
+    coins: 29000,
+    price: 299.99,
+    imageUrl: "/images/29000-coins.png",
   },
 ];
 
