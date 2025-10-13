@@ -1,101 +1,286 @@
 // pages/Products.tsx
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 type Product = {
   id: number;
   name: string;
   coins: number;
   price: number;
+  originalPrice?: number;
   imageUrl: string;
+  discount?: number;
+  popular?: boolean;
 };
 
-const products: Product[] = [
-  {
-    id: 1,
-    name: "350 Coins",
-    coins: 350,
-    price: 3.99,
-    imageUrl: "/images/350-coins.png",
-  },
-  {
-    id: 2,
-    name: "1410 Coins",
-    coins: 1410,
-    price: 14.99,
-    imageUrl: "/images/1410-coins.png",
-  },
-  {
-    id: 3,
-    name: "5000 Coins",
-    coins: 5000,
-    price: 49.99,
-    imageUrl: "/images/5000-coins.png",
-  },
-  {
-    id: 4,
-    name: "7000 Coins",
-    coins: 7000,
-    price: 69.99,
-    imageUrl: "/images/7000-coins.png",
-  },
-  {
-    id: 5,
-    name: "10000 Coins",
-    coins: 10000,
-    price: 99.99,
-    imageUrl: "/images/10000-coins.png",
-  },
-  {
-    id: 6,
-    name: "29000 Coins",
-    coins: 29000,
-    price: 299.99,
-    imageUrl: "/images/29000-coins.png",
-  },
-];
+type ProductsData = {
+  products: Product[];
+};
 
 const Products: React.FC = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const response = await fetch("/data/products.json");
+
+        if (!response.ok) {
+          throw new Error(`Failed to load products: ${response.statusText}`);
+        }
+
+        const data: ProductsData = await response.json();
+        setProducts(data.products);
+      } catch (err) {
+        setError(
+          err instanceof Error ? err.message : "Failed to load products"
+        );
+        console.error("Error loading products:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
+
+  const handleBuyNow = (product: Product) => {
+    // In a real app, this would add to cart or redirect to checkout
+    alert(`Added ${product.name} to cart! Redirecting to checkout...`);
+  };
+
+  if (loading) {
+    return (
+      <div>
+        {/* Hero Section */}
+        <section className="py-5 bg-light">
+          <div className="container">
+            <div className="section-header">
+              <h1 className="section-title">Our Products</h1>
+              <p className="section-subtitle">
+                Choose from our wide selection of StarMaker coin packages at
+                unbeatable prices
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Loading State */}
+        <section className="py-5">
+          <div className="container">
+            <div className="text-center">
+              <div
+                className="loading-spinner mb-3"
+                style={{ width: "50px", height: "50px", margin: "0 auto" }}
+              ></div>
+              <h4>Loading Products...</h4>
+              <p className="text-muted">
+                Please wait while we fetch our latest offerings
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div>
+        {/* Hero Section */}
+        <section className="py-5 bg-light">
+          <div className="container">
+            <div className="section-header">
+              <h1 className="section-title">Our Products</h1>
+              <p className="section-subtitle">
+                Choose from our wide selection of StarMaker coin packages at
+                unbeatable prices
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Error State */}
+        <section className="py-5">
+          <div className="container">
+            <div className="text-center">
+              <div
+                className="bg-danger text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                style={{ width: "80px", height: "80px" }}
+              >
+                <i className="fas fa-exclamation-triangle fa-2x"></i>
+              </div>
+              <h4 className="text-danger">Error Loading Products</h4>
+              <p className="text-muted mb-4">{error}</p>
+              <button
+                className="btn btn-primary"
+                onClick={() => window.location.reload()}
+              >
+                <i className="fas fa-refresh me-2"></i>
+                Try Again
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
   return (
     <div>
-      <h2>Products</h2>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
-        {products.map((product) => (
-          <div
-            key={product.id}
-            style={{
-              border: "1px solid #ccc",
-              borderRadius: "8px",
-              width: "180px",
-              padding: "10px",
-              textAlign: "center",
-              boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-            }}
-          >
-            <img
-              src={product.imageUrl}
-              alt={product.name}
-              style={{ width: "100%", height: "auto", borderRadius: "5px" }}
-            />
-            <h3 style={{ margin: "10px 0 5px" }}>{product.name}</h3>
-            <p>{product.coins.toLocaleString()} coins</p>
-            <p style={{ fontWeight: "bold" }}>${product.price.toFixed(2)}</p>
-            <button
-              style={{
-                marginTop: "10px",
-                padding: "8px 12px",
-                backgroundColor: "#0070f3",
-                border: "none",
-                borderRadius: "5px",
-                color: "white",
-                cursor: "pointer",
-              }}
-              onClick={() => alert(`Selected ${product.name} for purchase`)}
-            >
-              Buy Now
-            </button>
+      {/* Hero Section */}
+      <section className="py-5 bg-light">
+        <div className="container">
+          <div className="section-header">
+            <h1 className="section-title">Our Products</h1>
+            <p className="section-subtitle">
+              Choose from our wide selection of StarMaker coin packages at
+              unbeatable prices
+            </p>
           </div>
-        ))}
-      </div>
+        </div>
+      </section>
+
+      {/* Products Grid */}
+      <section className="py-5">
+        <div className="container">
+          <div className="row g-4">
+            {products.map((product) => (
+              <div key={product.id} className="col-lg-4 col-md-6">
+                <div className="product-card h-100">
+                  {product.popular && (
+                    <div className="product-badge">
+                      <i className="fas fa-star me-1"></i>
+                      Popular
+                    </div>
+                  )}
+
+                  <div className="position-relative">
+                    <img
+                      src={product.imageUrl}
+                      alt={product.name}
+                      className="product-image"
+                    />
+                    {product.discount && (
+                      <div className="position-absolute top-0 start-0 m-3">
+                        <span className="badge bg-danger fs-6">
+                          -{product.discount}%
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="card-body d-flex flex-column">
+                    <h5 className="product-title">{product.name}</h5>
+                    <p className="product-coins">
+                      <i className="fas fa-coins me-1"></i>
+                      {product.coins.toLocaleString()} coins
+                    </p>
+
+                    <div className="mt-auto">
+                      <div className="d-flex align-items-center mb-3">
+                        <span className="product-price">
+                          ${product.price.toFixed(2)}
+                        </span>
+                        {product.originalPrice && (
+                          <span className="text-muted text-decoration-line-through ms-2">
+                            ${product.originalPrice.toFixed(2)}
+                          </span>
+                        )}
+                      </div>
+
+                      <button
+                        className="btn btn-buy"
+                        onClick={() => handleBuyNow(product)}
+                      >
+                        <i className="fas fa-shopping-cart me-2"></i>
+                        Buy Now
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-5 bg-light">
+        <div className="container">
+          <div className="row g-4">
+            <div className="col-lg-4 col-md-6">
+              <div className="text-center">
+                <div
+                  className="bg-gradient-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                  style={{ width: "60px", height: "60px" }}
+                >
+                  <i className="fas fa-shipping-fast"></i>
+                </div>
+                <h5>Instant Delivery</h5>
+                <p className="text-muted small">
+                  Get your coins delivered instantly after payment
+                </p>
+              </div>
+            </div>
+
+            <div className="col-lg-4 col-md-6">
+              <div className="text-center">
+                <div
+                  className="bg-gradient-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                  style={{ width: "60px", height: "60px" }}
+                >
+                  <i className="fas fa-lock"></i>
+                </div>
+                <h5>Secure Payment</h5>
+                <p className="text-muted small">
+                  All transactions are protected with SSL encryption
+                </p>
+              </div>
+            </div>
+
+            <div className="col-lg-4 col-md-6">
+              <div className="text-center">
+                <div
+                  className="bg-gradient-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                  style={{ width: "60px", height: "60px" }}
+                >
+                  <i className="fas fa-headset"></i>
+                </div>
+                <h5>24/7 Support</h5>
+                <p className="text-muted small">
+                  Our support team is always here to help you
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-5">
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-lg-8">
+              <h3 className="mb-3">Ready to Make a Purchase?</h3>
+              <p className="text-muted mb-0">
+                Select your preferred package and proceed to secure checkout.
+              </p>
+            </div>
+            <div className="col-lg-4 text-lg-end">
+              <Link to="/checkout" className="btn btn-primary btn-lg px-4 py-3">
+                <i className="fas fa-credit-card me-2"></i>
+                Proceed to Checkout
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

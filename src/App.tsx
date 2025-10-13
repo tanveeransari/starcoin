@@ -1,68 +1,141 @@
-// import React from 'react';
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.tsx</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import Checkout from "./pages/Checkout";
+import "./coloshop-theme.css";
 
 const App: React.FC = () => {
   return (
     <Router>
-      <header
-        style={{ padding: "1rem", background: "#282c34", color: "white" }}
-      >
-        <h1>StarCoin Savings</h1>
-        <nav>
-          <Link to="/" style={{ color: "white", marginRight: "1rem" }}>
-            Home
+      {/* Navigation */}
+      <nav className="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div className="container">
+          <Link className="navbar-brand" to="/">
+            <i className="fas fa-coins me-2"></i>
+            DesiRider Savings
           </Link>
-          <Link to="/products" style={{ color: "white", marginRight: "1rem" }}>
-            Products
-          </Link>
-          <Link to="/checkout" style={{ color: "white" }}>
-            Checkout
-          </Link>
-        </nav>
-      </header>
-      <main style={{ padding: "1rem" }}>
+
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav ms-auto">
+              <li className="nav-item">
+                <Link className="nav-link" to="/">
+                  <i className="fas fa-home me-1"></i>
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/products">
+                  <i className="fas fa-shopping-bag me-1"></i>
+                  Products
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/checkout">
+                  <i className="fas fa-shopping-cart me-1"></i>
+                  Checkout
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      {/* Main Content */}
+      <main style={{ marginTop: "80px" }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/checkout" element={<Checkout />} />
         </Routes>
       </main>
-      <footer
-        style={{
-          textAlign: "center",
-          padding: "1rem",
-          borderTop: "1px solid #eee",
-        }}
-      >
-        &copy; 2025 StarCoin Savings
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-4 col-md-6 mb-4">
+              <h5>
+                <i className="fas fa-coins me-2"></i>
+                DesiRider Savings
+              </h5>
+              <p className="text-muted">
+                Your trusted partner for premium StarMaker coins at unbeatable
+                prices. Save more, play more!
+              </p>
+            </div>
+            <div className="col-lg-2 col-md-6 mb-4">
+              <h5>Quick Links</h5>
+              <ul className="list-unstyled">
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/products">Products</Link>
+                </li>
+                <li>
+                  <Link to="/checkout">Checkout</Link>
+                </li>
+              </ul>
+            </div>
+            <div className="col-lg-3 col-md-6 mb-4">
+              <h5>Support</h5>
+              <ul className="list-unstyled">
+                <li>
+                  <a href="#help">Help Center</a>
+                </li>
+                <li>
+                  <a href="#contact">Contact Us</a>
+                </li>
+                <li>
+                  <a href="#faq">FAQ</a>
+                </li>
+              </ul>
+            </div>
+            <div className="col-lg-3 col-md-6 mb-4">
+              <h5>Connect With Us</h5>
+              <div className="d-flex">
+                <a href="#" className="me-3 text-muted">
+                  <i className="fab fa-facebook-f fa-lg"></i>
+                </a>
+                <a href="#" className="me-3 text-muted">
+                  <i className="fab fa-twitter fa-lg"></i>
+                </a>
+                <a href="#" className="me-3 text-muted">
+                  <i className="fab fa-instagram fa-lg"></i>
+                </a>
+                <a href="#" className="text-muted">
+                  <i className="fab fa-youtube fa-lg"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <hr className="my-4" />
+          <div className="row align-items-center">
+            <div className="col-md-6">
+              <p className="mb-0 text-muted">
+                &copy; 2025 StarCoin Savings. All rights reserved.
+              </p>
+            </div>
+            <div className="col-md-6 text-md-end">
+              <a href="#privacy" className="text-muted me-3">
+                Privacy Policy
+              </a>
+              <a href="#terms" className="text-muted">
+                Terms of Service
+              </a>
+            </div>
+          </div>
+        </div>
       </footer>
     </Router>
   );
