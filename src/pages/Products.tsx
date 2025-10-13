@@ -1,17 +1,8 @@
 // pages/Products.tsx
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
-type Product = {
-  id: number;
-  name: string;
-  coins: number;
-  price: number;
-  originalPrice?: number;
-  imageUrl: string;
-  discount?: number;
-  popular?: boolean;
-};
+import { Product } from "../types";
+//export type { Product } from "../types";
 
 type ProductsData = {
   products: Product[];
