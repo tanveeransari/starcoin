@@ -23,10 +23,7 @@ const Home: React.FC = () => (
               <i className="fas fa-shopping-bag me-2"></i>
               Shop Now
             </Link>
-            <Link
-              to="/checkout"
-              className="btn btn-outline-light btn-lg px-4 py-3"
-            >
+            <Link to="/cart" className="btn btn-outline-light btn-lg px-4 py-3">
               <i className="fas fa-shopping-cart me-2"></i>
               Quick Checkout
             </Link>

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Product } from "../types";
 //export type { Product } from "../types";
+import { useCart } from "./CartContext";
 
 type ProductsData = {
   products: Product[];
@@ -12,6 +13,7 @@ const Products: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { addItem } = useCart();
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -40,9 +42,13 @@ const Products: React.FC = () => {
     loadProducts();
   }, []);
 
-  const handleBuyNow = (product: Product) => {
+  const handleBuyNow = (prd: Product) => {
     // In a real app, this would add to cart or redirect to checkout
-    alert(`Added ${product.name} to cart! Redirecting to checkout...`);
+    alert(
+      `Added 1 ${prd.name} to cart at price ${prd.price}! Redirecting to cart page...`
+    );
+    addItem({ ...prd, quantity: 1 });
+    //window.location.href = "/cart";
   };
 
   if (loading) {
@@ -188,6 +194,7 @@ const Products: React.FC = () => {
                       <button
                         className="btn btn-buy"
                         onClick={() => handleBuyNow(product)}
+                        //onClick={() => addItem({ ...product, quantity: 1 })}
                       >
                         <i className="fas fa-shopping-cart me-2"></i>
                         Buy Now
@@ -264,9 +271,9 @@ const Products: React.FC = () => {
               </p>
             </div>
             <div className="col-lg-4 text-lg-end">
-              <Link to="/checkout" className="btn btn-primary btn-lg px-4 py-3">
+              <Link to="/cart" className="btn btn-primary btn-lg px-4 py-3">
                 <i className="fas fa-credit-card me-2"></i>
-                Proceed to Checkout
+                Proceed to Cart
               </Link>
             </div>
           </div>
