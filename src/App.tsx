@@ -123,7 +123,7 @@ const App: React.FC = () => {
           <div className="row align-items-center">
             <div className="col-md-6">
               <p className="mb-0 text-muted">
-                &copy; 2025 StarCoin Savings. All rights reserved.
+                &copy; 2025 DesiRider Savings. All rights reserved.
               </p>
             </div>
             <div className="col-md-6 text-md-end">

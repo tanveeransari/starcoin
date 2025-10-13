@@ -39,7 +39,7 @@ const Home: React.FC = () => (
     <section className="py-5">
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">Why Choose StarCoin Savings?</h2>
+          <h2 className="section-title">Why Choose DesiRider Savings?</h2>
           <p className="section-subtitle">
             We offer the best deals on StarMaker coins with guaranteed delivery
             and 24/7 support.
@@ -55,7 +55,7 @@ const Home: React.FC = () => (
           <div className="col-lg-8">
             <h3 className="mb-3">Ready to Start Saving?</h3>
             <p className="text-muted mb-0">
-              Join thousands of satisfied customers who trust StarCoin Savings
+              Join thousands of satisfied customers who trust DesiRider Savings
               for their gaming needs.
             </p>
           </div>
