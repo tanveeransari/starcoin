@@ -5,9 +5,12 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
+    <script>window.SITE_NAME = "%REACT_APP_SITE_NAME%";
+      console.log(window.SITE_NAME + "SITE_NAME has been set just for learning purposes and isnt used in the app");
+    </script>
     <meta
       name="description"
-      content="DesiRider Savings - Your one-stop shop for discounted StarMaker coins"
+      content="%REACT_APP_SITE_NAME% Savings - Your one-stop shop for discounted StarMaker coins"
     />
 
     <!-- Bootstrap CSS -->
@@ -26,7 +29,7 @@
       rel="stylesheet"
     />
 
-    <title>Rayaan Savings - Premium Coin Store</title>
+    <title>%REACT_APP_SITE_NAME% Savings - Premium Coin Store</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
