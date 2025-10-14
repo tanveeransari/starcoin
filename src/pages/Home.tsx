@@ -9,7 +9,7 @@ const Home: React.FC = () => (
       <div className="container">
         <div className="hero-content fade-in-up">
           <h1 className="hero-title">
-            Welcome to <span className="text-gradient">DesiRider Savings</span>
+            Welcome to <span className="text-gradient">Rayaan Savings</span>
           </h1>
           <p className="hero-subtitle">
             Your one-stop shop for discounted StarMaker coins. Save more, play
@@ -36,7 +36,7 @@ const Home: React.FC = () => (
     <section className="py-5">
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">Why Choose DesiRider Savings?</h2>
+          <h2 className="section-title">Why Choose Rayaan Savings?</h2>
           <p className="section-subtitle">
             We offer the best deals on StarMaker coins with guaranteed delivery
             and 24/7 support.
@@ -52,8 +52,8 @@ const Home: React.FC = () => (
           <div className="col-lg-8">
             <h3 className="mb-3">Ready to Start Saving?</h3>
             <p className="text-muted mb-0">
-              Join thousands of satisfied customers who trust DesiRider Savings
-              for their gaming needs.
+              Join thousands of satisfied customers who trust Rayaan{" "}
+              {process.env.NODE_ENV} Savings for their gaming needs.
             </p>
           </div>
           <div className="col-lg-4 text-lg-end">

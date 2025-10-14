@@ -1,6 +1,6 @@
 // pages/Products.tsx
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Product } from "../types";
 //export type { Product } from "../types";
 import { useCart } from "./CartContext";
@@ -13,6 +13,7 @@ const Products: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
   const { addItem } = useCart();
 
   useEffect(() => {
@@ -45,10 +46,10 @@ const Products: React.FC = () => {
   const handleBuyNow = (prd: Product) => {
     // In a real app, this would add to cart or redirect to checkout
     alert(
-      `Added 1 ${prd.name} to cart at price ${prd.price}! Redirecting to cart page...`
+      `Added 1 ${prd.name} to cart at price ${prd.price}! Redirecting to cart...`
     );
     addItem({ ...prd, quantity: 1 });
-    //window.location.href = "/cart";
+    navigate("/cart");
   };
 
   if (loading) {
