@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Product } from "../types";
 //export type { Product } from "../types";
-import { useCart } from "./CartContext";
+import { useCart } from "../CartContext";
 
 type ProductsData = {
   products: Product[];

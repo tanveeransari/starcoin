@@ -5,7 +5,7 @@ import Products from "./pages/Products";
 import CartDisplay from "./pages/CartDisplay";
 
 import "./coloshop-theme.css";
-import { CartProvider } from "./pages/CartContext";
+import { CartProvider } from "./CartContext";
 
 const App: React.FC = () => {
   return (
