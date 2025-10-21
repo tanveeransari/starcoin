@@ -1,47 +1,38 @@
 // pages/Products.tsx
-import React, { useState, useEffect } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Product } from "../types";
-//export type { Product } from "../types";
 import { useCart } from "../CartContext";
 
-type ProductsData = {
-  products: Product[];
-};
+import PhonePouchImage from "../images/UniversalPhonePouch.jpg";
+import ThreeDPrintedImg from "../images/5000-coins.png";
+
+const products: Product[] = [
+  {
+    id: 1,
+
+    name: "EMoto TrakPak/PhonePouch",
+    coins: 350,
+    price: 9.99,
+    imageUrl: PhonePouchImage,
+    originalPrice: 15.99,
+    discount: 31,
+  },
+  {
+    id: 2,
+    name: "3D orinted Emoto Keychain",
+    coins: 1410,
+    price: 19.99,
+    originalPrice: 29.99,
+    discount: 33,
+    popular: true,
+    imageUrl: ThreeDPrintedImg,
+  },
+];
 
 const Products: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const { addItem } = useCart();
-
-  useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        const response = await fetch("/data/products.json");
-
-        if (!response.ok) {
-          throw new Error(`Failed to load products: ${response.statusText}`);
-        }
-
-        const data: ProductsData = await response.json();
-        setProducts(data.products);
-      } catch (err) {
-        setError(
-          err instanceof Error ? err.message : "Failed to load products"
-        );
-        console.error("Error loading products:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadProducts();
-  }, []);
 
   const handleBuyNow = (prd: Product) => {
     // In a real app, this would add to cart or redirect to checkout
@@ -51,83 +42,6 @@ const Products: React.FC = () => {
     addItem({ ...prd, quantity: 1 });
     navigate("/cart");
   };
-
-  if (loading) {
-    return (
-      <div>
-        {/* Hero Section */}
-        <section className="py-5 bg-light">
-          <div className="container">
-            <div className="section-header">
-              <h1 className="section-title">Our Products</h1>
-              <p className="section-subtitle">
-                Choose from our wide selection of moto products at unbeatable
-                prices
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Loading State */}
-        <section className="py-5">
-          <div className="container">
-            <div className="text-center">
-              <div
-                className="loading-spinner mb-3"
-                style={{ width: "50px", height: "50px", margin: "0 auto" }}
-              ></div>
-              <h4>Loading Products...</h4>
-              <p className="text-muted">
-                Please wait while we fetch our latest offerings
-              </p>
-            </div>
-          </div>
-        </section>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div>
-        {/* Hero Section */}
-        <section className="py-5 bg-light">
-          <div className="container">
-            <div className="section-header">
-              <h1 className="section-title">Our Products</h1>
-              <p className="section-subtitle">
-                Choose from our wide selection of moto products at unbeatable
-                unbeatable prices
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Error State */}
-        <section className="py-5">
-          <div className="container">
-            <div className="text-center">
-              <div
-                className="bg-danger text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
-                style={{ width: "80px", height: "80px" }}
-              >
-                <i className="fas fa-exclamation-triangle fa-2x"></i>
-              </div>
-              <h4 className="text-danger">Error Loading Products</h4>
-              <p className="text-muted mb-4">{error}</p>
-              <button
-                className="btn btn-primary"
-                onClick={() => window.location.reload()}
-              >
-                <i className="fas fa-refresh me-2"></i>
-                Try Again
-              </button>
-            </div>
-          </div>
-        </section>
-      </div>
-    );
-  }
 
   return (
     <div>
