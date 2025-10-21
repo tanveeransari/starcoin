@@ -1,0 +1,22 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "EMoto TrakPak/PhonePouch",
+      "coins": 350,
+      "price": 9.99,
+      "imageUrl": "/images/UniversalPhonePouch.jpg",
+      "originalPrice": 15.99,
+      "discount": 31
+    },
+        {
+      "id": 2,
+      "name": "3D Printed Doodads",
+      "coins": 5000,
+      "price": 19.99,
+      "originalPrice": 29.99,
+      "imageUrl": "/images/5000-coins.png",
+      "discount": 33
+    }
+  ]
+}
