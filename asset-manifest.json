@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.14aac9ca.css",
-    "main.js": "/static/js/main.0e838298.js",
+    "main.js": "/static/js/main.a320647d.js",
     "static/js/453.1f68cd8b.chunk.js": "/static/js/453.1f68cd8b.chunk.js",
     "static/media/5000-coins.png": "/static/media/5000-coins.461e36ed43178223684b.png",
     "static/media/UniversalPhonePouch.jpg": "/static/media/UniversalPhonePouch.0f62aeab557f3f6fed64.jpg",
     "index.html": "/index.html",
     "main.14aac9ca.css.map": "/static/css/main.14aac9ca.css.map",
-    "main.0e838298.js.map": "/static/js/main.0e838298.js.map",
+    "main.a320647d.js.map": "/static/js/main.a320647d.js.map",
     "453.1f68cd8b.chunk.js.map": "/static/js/453.1f68cd8b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.14aac9ca.css",
-    "static/js/main.0e838298.js"
+    "static/js/main.a320647d.js"
   ]
 }
