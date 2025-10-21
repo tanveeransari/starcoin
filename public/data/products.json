@@ -2,55 +2,21 @@
   "products": [
     {
       "id": 1,
-      "name": "350 Coins",
+      "name": "EMoto TrakPak/PhonePouch",
       "coins": 350,
-      "price": 4.99,
-      "imageUrl": "/images/350-coins.png"
+      "price": 9.99,
+      "imageUrl": "/images/UniversalPhonePouch.jpg",
+      "originalPrice": 15.99,
+      "discount": 31
     },
-    {
+        {
       "id": 2,
-      "name": "1410 Coins",
-      "coins": 1410,
-      "price": 17.99,
-      "imageUrl": "/images/1410-coins.png",
-      "popular": true
-    },
-    {
-      "id": 3,
-      "name": "5000 Coins",
+      "name": "3D Printed Doodads",
       "coins": 5000,
-      "price": 49.99,
-      "originalPrice": 69.99,
+      "price": 19.99,
+      "originalPrice": 29.99,
       "imageUrl": "/images/5000-coins.png",
-      "discount": 29
-    },
-    {
-      "id": 4,
-      "name": "7000 Coins",
-      "coins": 7000,
-      "price": 69.99,
-      "originalPrice": 99.99,
-      "imageUrl": "/images/7000-coins.png",
-      "discount": 30,
-      "popular": true
-    },
-    {
-      "id": 5,
-      "name": "10000 Coins",
-      "coins": 10000,
-      "price": 99.99,
-      "originalPrice": 149.99,
-      "imageUrl": "/images/10000-coins.png",
       "discount": 33
-    },
-    {
-      "id": 6,
-      "name": "29000 Coins",
-      "coins": 29000,
-      "price": 299.99,
-      "originalPrice": 399.99,
-      "imageUrl": "/images/29000-coins.png",
-      "discount": 25
     }
   ]
 }
