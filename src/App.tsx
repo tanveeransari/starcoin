@@ -9,7 +9,7 @@ import { CartProvider } from "./CartContext";
 
 const App: React.FC = () => {
   return (
-    <Router basename="/starcoin">
+    <Router>
       <CartProvider>
         {/* Navigation */}
         <nav className="navbar navbar-expand-lg navbar-dark fixed-top">
