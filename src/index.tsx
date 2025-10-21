@@ -7,7 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-document.title = `${process.env.REACT_APP_SITE_NAME} Savings - Premium Coin Store`;
+document.title = `${process.env.REACT_APP_SITE_NAME} - Premium moto Store`;
 root.render(
   <React.StrictMode>
     <App />

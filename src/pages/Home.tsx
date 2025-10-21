@@ -11,12 +11,11 @@ const Home: React.FC = () => (
           <h1 className="hero-title">
             Welcome to{" "}
             <span className="text-gradient">
-              {process.env.REACT_APP_SITE_NAME} Savings
+              {process.env.REACT_APP_SITE_NAME}
             </span>
           </h1>
           <p className="hero-subtitle">
-            Your one-stop shop for discounted StarMaker coins. Save more, play
-            more!
+            Your one-stop shop for discounted moto gear. Save more, ride more!
           </p>
           <div className="mt-4">
             <Link
@@ -40,11 +39,11 @@ const Home: React.FC = () => (
       <div className="container">
         <div className="section-header">
           <h2 className="section-title">
-            Why Choose {process.env.REACT_APP_SITE_NAME} Savings?
+            Why Choose {process.env.REACT_APP_SITE_NAME}?
           </h2>
           <p className="section-subtitle">
-            We offer the best deals on StarMaker coins with guaranteed delivery
-            and 24/7 support.
+            We offer the best deals on moto gear with fast delivery and 24/7
+            support.
           </p>
         </div>
       </div>
@@ -58,7 +57,7 @@ const Home: React.FC = () => (
             <h3 className="mb-3">Ready to Start Saving?</h3>
             <p className="text-muted mb-0">
               Join thousands of satisfied customers who trust{" "}
-              {process.env.REACT_APP_SITE_NAME} Savings for their gaming needs.
+              {process.env.REACT_APP_SITE_NAME} for their moto needs.
             </p>
           </div>
           <div className="col-lg-4 text-lg-end">

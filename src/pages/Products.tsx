@@ -61,8 +61,8 @@ const Products: React.FC = () => {
             <div className="section-header">
               <h1 className="section-title">Our Products</h1>
               <p className="section-subtitle">
-                Choose from our wide selection of StarMaker coin packages at
-                unbeatable prices
+                Choose from our wide selection of moto products at unbeatable
+                prices
               </p>
             </div>
           </div>
@@ -96,7 +96,7 @@ const Products: React.FC = () => {
             <div className="section-header">
               <h1 className="section-title">Our Products</h1>
               <p className="section-subtitle">
-                Choose from our wide selection of StarMaker coin packages at
+                Choose from our wide selection of moto products at unbeatable
                 unbeatable prices
               </p>
             </div>
@@ -137,8 +137,8 @@ const Products: React.FC = () => {
           <div className="section-header">
             <h1 className="section-title">Our Products</h1>
             <p className="section-subtitle">
-              Choose from our wide selection of StarMaker coin packages at
-              unbeatable prices
+              Choose from our wide selection of moto products at unbeatable
+              prices
             </p>
           </div>
         </div>
@@ -175,10 +175,6 @@ const Products: React.FC = () => {
 
                   <div className="card-body d-flex flex-column">
                     <h5 className="product-title">{product.name}</h5>
-                    <p className="product-coins">
-                      <i className="fas fa-coins me-1"></i>
-                      {product.coins.toLocaleString()} coins
-                    </p>
 
                     <div className="mt-auto">
                       <div className="d-flex align-items-center mb-3">

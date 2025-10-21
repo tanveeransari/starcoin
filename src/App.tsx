@@ -16,7 +16,7 @@ const App: React.FC = () => {
           <div className="container">
             <Link className="navbar-brand" to="/">
               <i className="fas fa-coins me-2"></i>
-              {process.env.REACT_APP_SITE_NAME} Savings
+              {process.env.REACT_APP_SITE_NAME}
             </Link>
 
             <button
@@ -69,11 +69,11 @@ const App: React.FC = () => {
               <div className="col-lg-4 col-md-6 mb-4">
                 <h5>
                   <i className="fas fa-coins me-2"></i>
-                  {process.env.REACT_APP_SITE_NAME} Savings
+                  {process.env.REACT_APP_SITE_NAME}
                 </h5>
                 <p className="text-muted">
-                  Your trusted partner for premium StarMaker coins at unbeatable
-                  prices. Save more, play more!
+                  Your trusted partner for premium moto gear at unbeatable
+                  prices. Save more, ride more!
                 </p>
               </div>
               <div className="col-lg-2 col-md-6 mb-4">
@@ -126,8 +126,8 @@ const App: React.FC = () => {
             <div className="row align-items-center">
               <div className="col-md-6">
                 <p className="mb-0 text-muted">
-                  &copy; 2025 {process.env.REACT_APP_SITE_NAME} Savings. All
-                  rights reserved.
+                  &copy; 2025 {process.env.REACT_APP_SITE_NAME}. All rights
+                  reserved.
                 </p>
               </div>
               <div className="col-md-6 text-md-end">
