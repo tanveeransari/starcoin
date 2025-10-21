@@ -4,19 +4,15 @@
       "id": 1,
       "name": "350 Coins",
       "coins": 350,
-      "price": 3.99,
-      "originalPrice": 4.99,
-      "imageUrl": "/images/350-coins.png",
-      "discount": 20
+      "price": 4.99,
+      "imageUrl": "/images/350-coins.png"
     },
     {
       "id": 2,
       "name": "1410 Coins",
       "coins": 1410,
-      "price": 14.99,
-      "originalPrice": 19.99,
+      "price": 17.99,
       "imageUrl": "/images/1410-coins.png",
-      "discount": 25,
       "popular": true
     },
     {
