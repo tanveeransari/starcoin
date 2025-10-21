@@ -1,15 +1,17 @@
 {
   "files": {
-    "main.css": "/starcoin/static/css/main.14aac9ca.css",
-    "main.js": "/starcoin/static/js/main.a950d69a.js",
-    "static/js/453.1f68cd8b.chunk.js": "/starcoin/static/js/453.1f68cd8b.chunk.js",
-    "index.html": "/starcoin/index.html",
-    "main.14aac9ca.css.map": "/starcoin/static/css/main.14aac9ca.css.map",
-    "main.a950d69a.js.map": "/starcoin/static/js/main.a950d69a.js.map",
-    "453.1f68cd8b.chunk.js.map": "/starcoin/static/js/453.1f68cd8b.chunk.js.map"
+    "main.css": "/tanveeransari/starcoin/static/css/main.14aac9ca.css",
+    "main.js": "/tanveeransari/starcoin/static/js/main.faa6a1d1.js",
+    "static/js/453.1f68cd8b.chunk.js": "/tanveeransari/starcoin/static/js/453.1f68cd8b.chunk.js",
+    "static/media/5000-coins.png": "/tanveeransari/starcoin/static/media/5000-coins.461e36ed43178223684b.png",
+    "static/media/UniversalPhonePouch.jpg": "/tanveeransari/starcoin/static/media/UniversalPhonePouch.0f62aeab557f3f6fed64.jpg",
+    "index.html": "/tanveeransari/starcoin/index.html",
+    "main.14aac9ca.css.map": "/tanveeransari/starcoin/static/css/main.14aac9ca.css.map",
+    "main.faa6a1d1.js.map": "/tanveeransari/starcoin/static/js/main.faa6a1d1.js.map",
+    "453.1f68cd8b.chunk.js.map": "/tanveeransari/starcoin/static/js/453.1f68cd8b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.14aac9ca.css",
-    "static/js/main.a950d69a.js"
+    "static/js/main.faa6a1d1.js"
   ]
 }
