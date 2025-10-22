@@ -42,7 +42,7 @@ const Home: React.FC = () => (
             Why Choose {process.env.REACT_APP_SITE_NAME}?
           </h2>
           <p className="section-subtitle">
-            We offer the best deals on moto gear with fast delivery and 24/7
+            We offer the best deals on moto gear with fast delivery and great
             support.
           </p>
         </div>
