@@ -1,13 +1,14 @@
-import React from "react";
+import React, { use } from "react";
+import { useNavigate } from "react-router-dom";
 import { useCart } from "../CartContext";
 
-declare global {
-  interface Window {
-    paypal: any;
-  }
-}
-
 const CartDisplay: React.FC = () => {
+  let navigate = useNavigate();
+  const routeChange = () => {
+    let path = `/checkout`;
+    navigate(path);
+  };
+
   const { cart, removeItem, clearCart } = useCart();
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
@@ -60,7 +61,9 @@ const CartDisplay: React.FC = () => {
                   <button className="btn btn-buy" onClick={clearCart}>
                     Empty Cart
                   </button>
-                  <button className="btn btn-primary">Proceed to Cart</button>
+                  <button className="btn btn-primary" onClick={routeChange}>
+                    Proceed to Cart
+                  </button>
                 </div>
               </>
             )}

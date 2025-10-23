@@ -36,9 +36,10 @@ const Products: React.FC = () => {
 
   const handleBuyNow = (prd: Product) => {
     // In a real app, this would add to cart or redirect to checkout
-    alert(
-      `Added 1 ${prd.name} to cart at price ${prd.price}! Redirecting to cart...`
-    );
+    console.log(`Buying product: ${prd.name} for $${prd.price}`);
+    // alert(
+    //   `Added 1 ${prd.name} to cart at price ${prd.price}! Redirecting to cart...`
+    // );
     addItem({ ...prd, quantity: 1 });
     navigate("/cart");
   };

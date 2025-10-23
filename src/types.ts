@@ -2,7 +2,7 @@
 export type Product = {
   id: number;
   name: string;
-  coins: number;
+  // coins: number;
   price: number;
   originalPrice?: number;
   imageUrl: string;
