@@ -12,7 +12,6 @@ const products: Product[] = [
     id: 1,
 
     name: "EMoto TrakPak/PhonePouch",
-    coins: 350,
     price: 9.99,
     imageUrl: PhonePouchImage,
     originalPrice: 15.99,
@@ -21,7 +20,6 @@ const products: Product[] = [
   {
     id: 2,
     name: "3D orinted Emoto Keychain",
-    coins: 1410,
     price: 19.99,
     originalPrice: 29.99,
     discount: 33,
