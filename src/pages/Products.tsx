@@ -19,7 +19,7 @@ const products: Product[] = [
   },
   {
     id: 2,
-    name: "3D orinted Emoto Keychain",
+    name: "3D Printed Emoto Keychain - pack of 3",
     price: 19.99,
     originalPrice: 29.99,
     discount: 33,
@@ -128,7 +128,7 @@ const Products: React.FC = () => {
                 </div>
                 <h5>Instant Delivery</h5>
                 <p className="text-muted small">
-                  Get your coins delivered instantly after payment
+                  Get your items delivered speedily after payment
                 </p>
               </div>
             </div>

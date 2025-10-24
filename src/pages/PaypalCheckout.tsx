@@ -15,16 +15,41 @@ function PaypalCheckoutNoReact() {
   console.log("Cart contents in PaypalCheckoutNoReact:", cart);
 
   const createOrder = (data: any, actions: any) => {
-    return actions.order.create({
+    // Transform cart items to PayPal items format
+    const items = cart.map((item) => ({
+      name: item.name,
+      unit_amount: {
+        currency_code: "USD",
+        value: item.price.toFixed(2),
+      },
+      quantity: item.quantity.toString(),
+      category: "PHYSICAL_GOODS", // Default category, you can modify this based on your product types
+      sku: `sku_${item.id}`, // Using item ID as SKU
+    }));
+
+    const orderTransaction = {
       purchase_units: [
         {
           amount: {
             currency_code: "USD",
-            value: total.toFixed(2),
+            value: (+total + +10.0).toFixed(2),
+            breakdown: {
+              item_total: {
+                currency_code: "USD",
+                value: total.toFixed(2),
+              },
+              shipping: {
+                currency_code: "USD",
+                value: "10.00",
+              },
+            },
           },
+          items: items,
         },
       ],
-    });
+    };
+    console.log("Order transaction object in createOrder:", orderTransaction);
+    return actions.order.create(orderTransaction);
   };
   const onApprove = (data: any, actions: any) => {
     return actions.order.capture().then(function (details: any) {
