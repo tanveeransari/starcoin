@@ -5,6 +5,12 @@ function PaypalCheckoutNoReact() {
   const { cart, clearCart } = useCart();
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const [{ isPending }] = usePayPalScriptReducer();
+
+  cart.forEach((item) => {
+    console.log(
+      `Item: ${item.name}, Price: ${item.price}, Quantity: ${item.quantity}`
+    );
+  });
   console.log("Total amount in PaypalCheckoutNoReact:", total);
   console.log("Cart contents in PaypalCheckoutNoReact:", cart);
 

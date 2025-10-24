@@ -119,9 +119,6 @@ const App: React.FC = () => {
                     <li>
                       <Link to="/checkout">Paypal</Link>
                     </li>
-                    <li>
-                      <Link to="/checkout2">Paypal No React</Link>
-                    </li>
                   </ul>
                 </div>
                 <div className="col-lg-3 col-md-6 mb-4">
