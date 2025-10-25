@@ -4,14 +4,17 @@ import { useCart } from "../CartContext";
 import PaypalCheckoutNoReact from "./PaypalCheckout";
 
 const CartDisplay: React.FC = () => {
-  const orderId = useId(); // Generate a unique order ID for this session. In a real application, you would likely want to generate this on the server side when the order is created
+  //const orderId = useId(); // Generate a unique order ID for this session. In a real application, you would likely want to generate this on the server side when the order is created
   const { cart, removeItem, clearCart } = useCart();
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const GetNewOrderId = () => {
+    return useId();
+  };
 
   const clearMyCart = () => {
     clearCart();
     setFormData({
-      orderId: "",
+      orderId: GetNewOrderId(),
       productIds: "",
       productNames: "",
       productQuantities: "",
@@ -28,7 +31,7 @@ const CartDisplay: React.FC = () => {
   };
 
   const [formData, setFormData] = useState({
-    orderId: orderId,
+    orderId: GetNewOrderId(),
     productIds: cart.map((item) => item.id).join(","),
     productNames: cart.map((item) => item.name).join(","),
     productQuantities: cart.map((item) => item.quantity).join(","),
@@ -66,26 +69,23 @@ const CartDisplay: React.FC = () => {
       return;
     }
 
-    setStatus("Sending...");
+    // setStatus("Sending...");
 
-    try {
-      const response = await fetch("https://formspree.io/f/mqagzpzj", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+    // try {
+    //   const response = await fetch("https://formspree.io/f/mqagzpzj", {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify(formData),
+    //   });
 
-      if (response.ok) {
-        setStatus("✅ Thank you! Your information was sent successfully.");
-        // setFormData({
-        //   orderId: orderId,
-        // });
-      } else {
-        setStatus("❌ There was an error sending your information.");
-      }
-    } catch (error) {
-      setStatus("⚠️ Network error. Please try again later.");
-    }
+    //   if (response.ok) {
+    //     setStatus("✅ Thank you! Your information was sent successfully.");
+    //   } else {
+    //     setStatus("❌ There was an error sending your information.");
+    //   }
+    // } catch (error) {
+    //   setStatus("⚠️ Network error. Please try again later.");
+    // }
   };
 
   return (
@@ -218,7 +218,9 @@ const CartDisplay: React.FC = () => {
                     Empty Cart
                   </button>
                 </div>
-                <PaypalCheckoutNoReact addressInfo={formData} />
+                <div id="paypal-button-container" className="d-flex gap-2 mt-4">
+                  <PaypalCheckoutNoReact addressInfo={formData} />
+                </div>
               </>
             )}
           </div>

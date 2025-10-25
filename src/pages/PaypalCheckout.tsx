@@ -10,7 +10,7 @@ function PaypalCheckoutNoReact({ addressInfo }: { addressInfo: any }) {
   //const totalAmount = +subTotal + +shippingCost; //+ taxAmount;
 
   const [{ isPending }] = usePayPalScriptReducer();
-
+  /*
   cart.forEach((item) => {
     console.log(
       `Item: ${item.name}, Price: ${item.price}, Quantity: ${item.quantity}`
@@ -19,6 +19,7 @@ function PaypalCheckoutNoReact({ addressInfo }: { addressInfo: any }) {
 
   console.log("Address info for PayPal checkout:", addressInfo);
   console.log("Cart contents in PaypalCheckoutNoReact:", cart);
+  */
 
   const createOrder = (data: any, actions: any) => {
     // Transform cart items to PayPal items format
@@ -97,16 +98,54 @@ function PaypalCheckoutNoReact({ addressInfo }: { addressInfo: any }) {
     return actions.order.create(orderTransaction);
   };
   const onApprove = (data: any, actions: any) => {
-    return actions.order.capture().then(function (details: any) {
-      alert("Transaction completed by " + details.payer.name.given_name);
+    return actions.order.capture().then(async function (details: any) {
+      // console.log("Transaction details in onApprove:", details);
+      console.log(
+        "Transaction completed by " +
+          details.payer.name.given_name +
+          ". Transaction ID: " +
+          details.id +
+          ". Payer ID: " +
+          details.payer.payer_id +
+          ". Payer Email: " +
+          details.payer.email_address +
+          ". Shipping Address: " +
+          details.purchase_units[0].shipping.address.address_line_1 +
+          ", " +
+          details.purchase_units[0].shipping.address.admin_area_2 +
+          ", " +
+          details.purchase_units[0].shipping.address.admin_area_1 +
+          ", " +
+          details.purchase_units[0].shipping.address.postal_code +
+          ", " +
+          details.purchase_units[0].shipping.address.country_code
+      );
+
       clearCart();
+
+      try {
+        const response = await fetch("https://formspree.io/f/mqagzpzj", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(details),
+        });
+        await response.json();
+        if (!response.ok) {
+          alert("❌ There was an error sending your information.");
+        }
+      } catch (error) {
+        alert("⚠️ Network error. Please try again later.");
+      }
     });
   };
 
   const onError = (err: any) => {
     console.error("PayPal Checkout onError", err);
-    alert("An error occurred during the transaction. Please try again.");
-    //TODO: redirect to error page
+    //alert("An error occurred during the transaction. Please try again.");
+    alert(
+      err.message ||
+        "⚠️An error occurred during the transaction. Please try again."
+    );
   };
 
   const onCancel = (data: any, actions: any) => {

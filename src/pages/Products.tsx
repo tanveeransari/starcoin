@@ -5,7 +5,7 @@ import { Product } from "../types";
 import { useCart } from "../CartContext";
 
 import PhonePouchImage from "../images/UniversalPhonePouch.jpg";
-import ThreeDPrintedImg from "../images/5000-coins.png";
+import ThreeDPrintedImg from "../images/keychain.jpg";
 
 const products: Product[] = [
   {
