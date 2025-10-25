@@ -7,7 +7,6 @@ import CartDisplay from "./pages/CartDisplay";
 import "./coloshop-theme.css";
 import { CartProvider } from "./CartContext";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
-import PaypalCheckout from "./pages/PaypalCheckout";
 
 //const environment = process.env.ENVIRONMENT === "production" ? "production" : "sandbox";
 
@@ -68,12 +67,6 @@ const App: React.FC = () => {
                       Cart
                     </Link>
                   </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/checkout">
-                      <i className="fas fa-shopping-cart me-1"></i>
-                      Paypal checkout
-                    </Link>
-                  </li>
                 </ul>
               </div>
             </div>
@@ -85,8 +78,6 @@ const App: React.FC = () => {
               <Route path="/" element={<Home />} />
               <Route path="/products" element={<Products />} />
               <Route path="/cart" element={<CartDisplay />} />
-              {/* <Route path="/checkout" element={<PayPalButtons />} /> */}
-              <Route path="/checkout" element={<PaypalCheckout />} />
             </Routes>
           </main>
 
@@ -115,9 +106,6 @@ const App: React.FC = () => {
                     </li>
                     <li>
                       <Link to="/cart">Cart</Link>
-                    </li>
-                    <li>
-                      <Link to="/checkout">Paypal</Link>
                     </li>
                   </ul>
                 </div>

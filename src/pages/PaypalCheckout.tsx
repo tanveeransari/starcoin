@@ -1,9 +1,14 @@
 import { useCart } from "../CartContext";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 
-function PaypalCheckoutNoReact() {
+const shippingCost = +8.99; // Flat shipping cost, you can modify this as needed
+
+function PaypalCheckoutNoReact({ addressInfo }: { addressInfo: any }) {
   const { cart, clearCart } = useCart();
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  //const taxAmount = subTotal * taxRate;
+  //const totalAmount = +subTotal + +shippingCost; //+ taxAmount;
+
   const [{ isPending }] = usePayPalScriptReducer();
 
   cart.forEach((item) => {
@@ -11,7 +16,8 @@ function PaypalCheckoutNoReact() {
       `Item: ${item.name}, Price: ${item.price}, Quantity: ${item.quantity}`
     );
   });
-  console.log("Total amount in PaypalCheckoutNoReact:", total);
+
+  console.log("Address info for PayPal checkout:", addressInfo);
   console.log("Cart contents in PaypalCheckoutNoReact:", cart);
 
   const createOrder = (data: any, actions: any) => {
@@ -28,11 +34,21 @@ function PaypalCheckoutNoReact() {
     }));
 
     const orderTransaction = {
+      intent: "CAPTURE",
+      payment_source: {
+        paypal: {
+          experience_context: {
+            user_action: "PAY_NOW",
+            shipping_preference: "SET_PROVIDED_ADDRESS",
+            brand_name: "E-MX Customs",
+          },
+        },
+      },
       purchase_units: [
         {
           amount: {
             currency_code: "USD",
-            value: (+total + +10.0).toFixed(2),
+            value: (+total + +shippingCost).toFixed(2),
             breakdown: {
               item_total: {
                 currency_code: "USD",
@@ -40,14 +56,43 @@ function PaypalCheckoutNoReact() {
               },
               shipping: {
                 currency_code: "USD",
-                value: "10.00",
+                value: shippingCost.toFixed(2),
               },
+              discount: null, // You can calculate and set discount here if needed
+              handling: null, // You can calculate and set handling fee here if needed
+              insurance: null, // You can calculate and set insurance fee here if needed
+              shipping_discount: null, // You can calculate and set shipping discount here if needed
+              tax_total: null, // You can calculate and set tax total here if needed
+            },
+          },
+          shipping: {
+            currency_code: "USD",
+            value: shippingCost.toFixed(2),
+            name: {
+              full_name: addressInfo.name,
+            },
+            address: {
+              address_name: addressInfo.name,
+              address_line_1: addressInfo.street,
+              address_line_2: "",
+              admin_area_2: addressInfo.city,
+              admin_area_1: addressInfo.state,
+              postal_code: "60130",
+              country_code: addressInfo.country || "US", // Default to US if country is not provided
             },
           },
           items: items,
         },
       ],
+      payer: {
+        name: {
+          given_name: addressInfo.name.split(" ")[0],
+          surname: addressInfo.name.split(" ").slice(1).join(" "),
+        },
+        email_address: addressInfo.email,
+      },
     };
+
     console.log("Order transaction object in createOrder:", orderTransaction);
     return actions.order.create(orderTransaction);
   };
