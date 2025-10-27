@@ -1,15 +1,20 @@
 import React, { useId } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCart } from "../CartContext";
-import PaypalCheckoutNoReact from "./PaypalCheckout";
+import PaypalCheckout from "./PaypalCheckout";
 
 const CartDisplay: React.FC = () => {
   //const orderId = useId(); // Generate a unique order ID for this session. In a real application, you would likely want to generate this on the server side when the order is created
+  const [showPaypal, setShowPaypal] = useState(false);
   const { cart, removeItem, clearCart } = useCart();
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const GetNewOrderId = () => {
     return useId();
   };
+
+  useEffect(() => {
+    //TODO: DO any initializaton if needed
+  }, []);
 
   const clearMyCart = () => {
     clearCart();
@@ -46,10 +51,11 @@ const CartDisplay: React.FC = () => {
     phone: "",
   });
 
-  const [status, setStatus] = useState("");
+  //const [status, setStatus] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setShowPaypal(false);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -65,8 +71,10 @@ const CartDisplay: React.FC = () => {
       !formData.zip ||
       !formData.email
     ) {
-      setStatus("Please fill in all required fields.");
-      return;
+      setShowPaypal(false);
+      //setStatus("Please fill in all required fields.");
+    } else {
+      setShowPaypal(true);
     }
 
     // setStatus("Sending...");
@@ -87,7 +95,6 @@ const CartDisplay: React.FC = () => {
     //   setStatus("⚠️ Network error. Please try again later.");
     // }
   };
-
   return (
     <div className="container my-5">
       <div className="row justify-content-center">
@@ -101,25 +108,15 @@ const CartDisplay: React.FC = () => {
               <>
                 <ul className="list-group mb-3">
                   {cart.map((item) => (
-                    <li
-                      key={item.id}
-                      className="list-group-item d-flex justify-content-between align-items-center"
-                    >
+                    <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center">
                       <div>
                         <div className="product-title">{item.name}</div>
-                        <small className="text-muted">
-                          Qty: {item.quantity}
-                        </small>
+                        <small className="text-muted">Qty: {item.quantity}</small>
                       </div>
                       <div className="text-end">
-                        <div className="product-price">
-                          ${(item.price * item.quantity).toFixed(2)}
-                        </div>
+                        <div className="product-price">${(item.price * item.quantity).toFixed(2)}</div>
                         <div className="mt-2">
-                          <button
-                            className="btn btn-sm btn-outline-danger"
-                            onClick={() => removeItem(item.id)}
-                          >
+                          <button className="btn btn-sm btn-outline-danger" onClick={() => removeItem(item.id)}>
                             Remove
                           </button>
                         </div>
@@ -134,10 +131,7 @@ const CartDisplay: React.FC = () => {
                 </div>
 
                 <div className="d-flex gap-5 mb-4">
-                  <form
-                    onSubmit={handleSubmit}
-                    className="p-4 border rounded shadow-sm bg-white"
-                  >
+                  <form onSubmit={handleSubmit} className="p-4 border rounded shadow-sm bg-white">
                     <h2 className="mb-3">Shipping Information</h2>
 
                     <input
@@ -208,19 +202,18 @@ const CartDisplay: React.FC = () => {
                     <button type="submit" className="btn btn-primary w-100">
                       Continue to Checkout
                     </button>
-
-                    <p className="text-sm mt-2 text-gray-700">{status}</p>
                   </form>
                 </div>
+                {/* <div className="text-center">
+                  <p className="text-sm mt-2 text-gray-700">{status}</p>
+                </div> */}
 
                 <div className="d-flex gap-2">
                   <button className="btn btn-buy" onClick={clearMyCart}>
                     Empty Cart
                   </button>
                 </div>
-                <div id="paypal-button-container" className="d-flex gap-2 mt-4">
-                  <PaypalCheckoutNoReact addressInfo={formData} />
-                </div>
+                <PaypalCheckout addressInfo={formData} showPayPal={showPaypal} />
               </>
             )}
           </div>

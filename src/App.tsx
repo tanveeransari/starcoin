@@ -3,6 +3,7 @@ import { HashRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import CartDisplay from "./pages/CartDisplay";
+import logo from "./images/logo.jpg";
 
 import "./coloshop-theme.css";
 import { CartProvider } from "./CartContext";
@@ -33,10 +34,18 @@ const App: React.FC = () => {
           {/* Navigation */}
           <nav className="navbar navbar-expand-lg navbar-dark fixed-top">
             <div className="container">
-              <Link className="navbar-brand" to="/">
+              <Link className="navbar-brand d-flex align-items-center" to="/">
+                <img
+                  src={logo}
+                  alt={process.env.REACT_APP_SITE_NAME || "Site logo"}
+                  style={{ height: 40, width: "auto", objectFit: "contain" }}
+                  className="me-2"
+                />
+              </Link>
+              {/* <Link className="navbar-brand" to="/">
                 <i className="fas fa-coins me-2"></i>
                 {process.env.REACT_APP_SITE_NAME}
-              </Link>
+              </Link> */}
 
               <button
                 className="navbar-toggler"
@@ -123,9 +132,9 @@ const App: React.FC = () => {
                     </li>
                   </ul>
                 </div>
-                <div className="col-lg-3 col-md-6 mb-4">
+                {/* <div className="col-lg-3 col-md-6 mb-4">
                   <h5>Connect With Us</h5>
-                  {/* <div className="d-flex">
+                  <div className="d-flex">
                     <a href="#" className="me-3 text-muted">
                       <i className="fab fa-facebook-f fa-lg"></i>
                     </a>
@@ -138,8 +147,8 @@ const App: React.FC = () => {
                     <a href="#" className="text-muted">
                       <i className="fab fa-youtube fa-lg"></i>
                     </a>
-                  </div> */}
-                </div>
+                  </div>
+                </div> */}
               </div>
               <hr className="my-4" />
               <div className="row align-items-center">

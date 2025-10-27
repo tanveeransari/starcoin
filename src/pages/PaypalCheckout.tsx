@@ -3,9 +3,9 @@ import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 
 const shippingCost = +8.99; // Flat shipping cost, you can modify this as needed
 
-function PaypalCheckoutNoReact({ addressInfo }: { addressInfo: any }) {
+function PaypalCheckout({ addressInfo, showPayPal }: { addressInfo: any; showPayPal: boolean }) {
   const { cart, clearCart } = useCart();
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   //const taxAmount = subTotal * taxRate;
   //const totalAmount = +subTotal + +shippingCost; //+ taxAmount;
 
@@ -16,9 +16,6 @@ function PaypalCheckoutNoReact({ addressInfo }: { addressInfo: any }) {
       `Item: ${item.name}, Price: ${item.price}, Quantity: ${item.quantity}`
     );
   });
-
-  console.log("Address info for PayPal checkout:", addressInfo);
-  console.log("Cart contents in PaypalCheckoutNoReact:", cart);
   */
 
   const createOrder = (data: any, actions: any) => {
@@ -49,11 +46,11 @@ function PaypalCheckoutNoReact({ addressInfo }: { addressInfo: any }) {
         {
           amount: {
             currency_code: "USD",
-            value: (+total + +shippingCost).toFixed(2),
+            value: (+subtotal + +shippingCost).toFixed(2),
             breakdown: {
               item_total: {
                 currency_code: "USD",
-                value: total.toFixed(2),
+                value: subtotal.toFixed(2),
               },
               shipping: {
                 currency_code: "USD",
@@ -122,7 +119,7 @@ function PaypalCheckoutNoReact({ addressInfo }: { addressInfo: any }) {
       );
 
       clearCart();
-
+      console.log(details);
       try {
         const response = await fetch("https://formspree.io/f/mqagzpzj", {
           method: "POST",
@@ -142,10 +139,7 @@ function PaypalCheckoutNoReact({ addressInfo }: { addressInfo: any }) {
   const onError = (err: any) => {
     console.error("PayPal Checkout onError", err);
     //alert("An error occurred during the transaction. Please try again.");
-    alert(
-      err.message ||
-        "⚠️An error occurred during the transaction. Please try again."
-    );
+    alert(err.message || "⚠️An error occurred during the transaction. Please try again.");
   };
 
   const onCancel = (data: any, actions: any) => {
@@ -154,20 +148,14 @@ function PaypalCheckoutNoReact({ addressInfo }: { addressInfo: any }) {
   };
 
   return (
-    <div id="payment_options" className="mt-4">
-      {isPending ? (
-        <div id="loading">Loading PayPal Buttons...</div>
-      ) : (
-        <div id="loaded"></div>
+    <div id="paypal-button-container" className="d-flex gap-2 mt-4">
+      {showPayPal && (
+        <div id="payment_options" className="mt-4">
+          {isPending ? <div id="loading">Loading PayPal Buttons...</div> : <div id="loaded"></div>}
+          <PayPalButtons style={{ layout: "vertical" }} createOrder={createOrder} onApprove={onApprove} onError={onError} onCancel={onCancel} />
+        </div>
       )}
-      <PayPalButtons
-        style={{ layout: "vertical" }}
-        createOrder={createOrder}
-        onApprove={onApprove}
-        onError={onError}
-        onCancel={onCancel}
-      />
     </div>
   );
 }
-export default PaypalCheckoutNoReact;
+export default PaypalCheckout;
