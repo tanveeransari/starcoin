@@ -47,12 +47,7 @@ const App: React.FC = () => {
                 {process.env.REACT_APP_SITE_NAME}
               </Link> */}
 
-              <button
-                className="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNav"
-              >
+              <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span className="navbar-toggler-icon"></span>
               </button>
 
@@ -100,8 +95,7 @@ const App: React.FC = () => {
                     {process.env.REACT_APP_SITE_NAME}
                   </h5>
                   <p className="text-muted">
-                    Your trusted partner for premium moto gear at unbeatable
-                    prices. Save more, ride more!
+                    Your trusted partner for premium moto gear at unbeatable prices. Save more, ride more!
                   </p>
                 </div>
                 <div className="col-lg-2 col-md-6 mb-4">
@@ -153,10 +147,7 @@ const App: React.FC = () => {
               <hr className="my-4" />
               <div className="row align-items-center">
                 <div className="col-md-6">
-                  <p className="mb-0 text-muted">
-                    &copy; 2025 {process.env.REACT_APP_SITE_NAME}. All rights
-                    reserved.
-                  </p>
+                  <p className="mb-0 text-muted">&copy; 2025 {process.env.REACT_APP_SITE_NAME}. All rights reserved.</p>
                 </div>
                 <div className="col-md-6 text-md-end">
                   <a href="#privacy" className="text-muted me-3">

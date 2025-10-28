@@ -97,28 +97,29 @@ function PaypalCheckout({ addressInfo, showPayPal }: { addressInfo: any; showPay
   const onApprove = (data: any, actions: any) => {
     return actions.order.capture().then(async function (details: any) {
       // console.log("Transaction details in onApprove:", details);
-      console.log(
+      const msg =
         "Transaction completed by " +
-          details.payer.name.given_name +
-          ". Transaction ID: " +
-          details.id +
-          ". Payer ID: " +
-          details.payer.payer_id +
-          ". Payer Email: " +
-          details.payer.email_address +
-          ". Shipping Address: " +
-          details.purchase_units[0].shipping.address.address_line_1 +
-          ", " +
-          details.purchase_units[0].shipping.address.admin_area_2 +
-          ", " +
-          details.purchase_units[0].shipping.address.admin_area_1 +
-          ", " +
-          details.purchase_units[0].shipping.address.postal_code +
-          ", " +
-          details.purchase_units[0].shipping.address.country_code
-      );
-
+        details.payer.name.given_name +
+        ". Transaction ID: " +
+        details.id +
+        ". Payer ID: " +
+        details.payer.payer_id +
+        ". Payer Email: " +
+        details.payer.email_address +
+        ". Shipping Address: " +
+        details.purchase_units[0].shipping.address.address_line_1 +
+        ", " +
+        details.purchase_units[0].shipping.address.admin_area_2 +
+        ", " +
+        details.purchase_units[0].shipping.address.admin_area_1 +
+        ", " +
+        details.purchase_units[0].shipping.address.postal_code +
+        ", " +
+        details.purchase_units[0].shipping.address.country_code;
+      document.getElementById("loaded")!.innerHTML = "<h3>Thank you for your purchase!</h3>";
+      alert("✅ " + msg);
       clearCart();
+
       console.log(details);
       try {
         const response = await fetch("https://formspree.io/f/mqagzpzj", {
@@ -128,10 +129,10 @@ function PaypalCheckout({ addressInfo, showPayPal }: { addressInfo: any; showPay
         });
         await response.json();
         if (!response.ok) {
-          alert("❌ There was an error sending your information.");
+          alert("❌ There was an error sending your information." + response.statusText);
         }
       } catch (error) {
-        alert("⚠️ Network error. Please try again later.");
+        alert("⚠️ Network error. Please try again later." + error);
       }
     });
   };
@@ -152,7 +153,13 @@ function PaypalCheckout({ addressInfo, showPayPal }: { addressInfo: any; showPay
       {showPayPal && (
         <div id="payment_options" className="mt-4">
           {isPending ? <div id="loading">Loading PayPal Buttons...</div> : <div id="loaded"></div>}
-          <PayPalButtons style={{ layout: "vertical" }} createOrder={createOrder} onApprove={onApprove} onError={onError} onCancel={onCancel} />
+          <PayPalButtons
+            style={{ layout: "vertical" }}
+            createOrder={createOrder}
+            onApprove={onApprove}
+            onError={onError}
+            onCancel={onCancel}
+          />
         </div>
       )}
     </div>
