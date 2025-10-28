@@ -1,5 +1,5 @@
 // pages/Products.tsx
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Product } from "../types";
 import { useCart } from "../CartContext";
@@ -29,13 +29,21 @@ const products: Product[] = [
 ];
 
 const Products: React.FC = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const { addItem } = useCart();
+  const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
+
+  const handleQuantityChange = (productId: number, change: number) => {
+    setQuantities((prev) => ({
+      ...prev,
+      [productId]: Math.max(1, (prev[productId] || 1) + change),
+    }));
+  };
 
   const handleBuyNow = (prd: Product) => {
-    //console.log(`Buying product: ${prd.name} for $${prd.price}`);
-    addItem({ ...prd, quantity: 1 });
-    navigate("/cart");
+    const quantity = quantities[prd.id] || 1;
+    addItem({ ...prd, quantity });
+    //navigate("/cart");
   };
 
   return (
@@ -97,10 +105,45 @@ const Products: React.FC = () => {
                         )}
                       </div>
 
+                      {/* Quantity Selector */}
+                      <div className="d-flex align-items-center justify-content-right mb-3">
+                        <label className="form-label me-2 mb-0">
+                          Quantity:
+                        </label>
+                        <div className="input-group" style={{ width: "120px" }}>
+                          <button
+                            className="btn btn-outline-secondary btn-sm"
+                            type="button"
+                            onClick={() => handleQuantityChange(product.id, -1)}
+                          >
+                            -
+                          </button>
+                          <input
+                            type="number"
+                            className="form-control text-center"
+                            value={quantities[product.id] || 1}
+                            min="1"
+                            onChange={(e) => {
+                              const value = parseInt(e.target.value) || 1;
+                              setQuantities((prev) => ({
+                                ...prev,
+                                [product.id]: Math.max(1, value),
+                              }));
+                            }}
+                          />
+                          <button
+                            className="btn btn-outline-secondary btn-sm"
+                            type="button"
+                            onClick={() => handleQuantityChange(product.id, 1)}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+
                       <button
                         className="btn btn-buy"
                         onClick={() => handleBuyNow(product)}
-                        //onClick={() => addItem({ ...product, quantity: 1 })}
                       >
                         <i className="fas fa-shopping-cart me-2"></i>
                         Buy Now
