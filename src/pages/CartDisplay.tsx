@@ -2,12 +2,14 @@ import React, { useId } from "react";
 import { useState, useEffect } from "react";
 import { useCart } from "../CartContext";
 import PaypalCheckout from "./PaypalCheckout";
+import { calculateCartTotals } from "../CartCalculation";
 
 const CartDisplay: React.FC = () => {
   //const orderId = useId(); // Generate a unique order ID for this session. In a real application, you would likely want to generate this on the server side when the order is created
   const [showPaypal, setShowPaypal] = useState(false);
   const { cart, removeItem, clearCart } = useCart();
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const [subtotal, totalAmount, taxAmount, shippingCost] = calculateCartTotals(cart);
+  //cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const GetNewOrderId = () => {
     return useId();
   };
@@ -41,7 +43,7 @@ const CartDisplay: React.FC = () => {
     productNames: cart.map((item) => item.name).join(","),
     productQuantities: cart.map((item) => item.quantity).join(","),
     productPrices: cart.map((item) => item.price.toFixed(2)).join(","),
-    totalAmount: total.toFixed(2),
+    totalAmount: totalAmount.toFixed(2),
     name: "",
     email: "",
     street: "",
@@ -76,24 +78,6 @@ const CartDisplay: React.FC = () => {
     } else {
       setShowPaypal(true);
     }
-
-    // setStatus("Sending...");
-
-    // try {
-    //   const response = await fetch("https://formspree.io/f/mqagzpzj", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify(formData),
-    //   });
-
-    //   if (response.ok) {
-    //     setStatus("✅ Thank you! Your information was sent successfully.");
-    //   } else {
-    //     setStatus("❌ There was an error sending your information.");
-    //   }
-    // } catch (error) {
-    //   setStatus("⚠️ Network error. Please try again later.");
-    // }
   };
   return (
     <div className="container my-5">
@@ -125,9 +109,20 @@ const CartDisplay: React.FC = () => {
                   ))}
                 </ul>
 
+                <div className="d-flex justify-content-between align-items-center mb-1">
+                  <h5 className="mb-0">Tax:</h5>
+                  <h4 className="text-gradient mb-0">${taxAmount.toFixed(2)}</h4>
+                </div>
+
+                <div className="d-flex justify-content-between align-items-center mb-3">
+                  <h5 className="mb-0">Shipping:</h5>
+                  <h4 className="text-gradient mb-0">${shippingCost.toFixed(2)}</h4>
+                </div>
+                <hr />
+
                 <div className="d-flex justify-content-between align-items-center mb-3">
                   <h5 className="mb-0">Total:</h5>
-                  <h4 className="text-gradient mb-0">${total.toFixed(2)}</h4>
+                  <h4 className="text-gradient mb-0">${totalAmount.toFixed(2)}</h4>
                 </div>
 
                 <div className="d-flex gap-5 mb-4">

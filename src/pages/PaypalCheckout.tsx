@@ -1,13 +1,12 @@
+import { calculateCartTotals } from "../CartCalculation";
 import { useCart } from "../CartContext";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
-
-const shippingCost = +8.99; // Flat shipping cost, you can modify this as needed
+import { useNavigate } from "react-router-dom";
 
 function PaypalCheckout({ addressInfo, showPayPal }: { addressInfo: any; showPayPal: boolean }) {
   const { cart, clearCart } = useCart();
-  const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  //const taxAmount = subTotal * taxRate;
-  //const totalAmount = +subTotal + +shippingCost; //+ taxAmount;
+  const navigate = useNavigate();
+  const [subtotal, totalAmount, taxAmount, shippingCost] = calculateCartTotals(cart);
 
   const [{ isPending }] = usePayPalScriptReducer();
   /*
@@ -46,7 +45,7 @@ function PaypalCheckout({ addressInfo, showPayPal }: { addressInfo: any; showPay
         {
           amount: {
             currency_code: "USD",
-            value: (+subtotal + +shippingCost).toFixed(2),
+            value: totalAmount.toFixed(2),
             breakdown: {
               item_total: {
                 currency_code: "USD",
@@ -60,7 +59,10 @@ function PaypalCheckout({ addressInfo, showPayPal }: { addressInfo: any; showPay
               handling: null, // You can calculate and set handling fee here if needed
               insurance: null, // You can calculate and set insurance fee here if needed
               shipping_discount: null, // You can calculate and set shipping discount here if needed
-              tax_total: null, // You can calculate and set tax total here if needed
+              tax_total: {
+                currency_code: "USD",
+                value: taxAmount.toFixed(2),
+              }, // You can calculate and set tax total here if needed
             },
           },
           shipping: {
@@ -72,10 +74,10 @@ function PaypalCheckout({ addressInfo, showPayPal }: { addressInfo: any; showPay
             address: {
               address_name: addressInfo.name,
               address_line_1: addressInfo.street,
-              address_line_2: "",
+              address_line_2: addressInfo.apartment || "",
               admin_area_2: addressInfo.city,
               admin_area_1: addressInfo.state,
-              postal_code: "60130",
+              postal_code: addressInfo.zip,
               country_code: addressInfo.country || "US", // Default to US if country is not provided
             },
           },
@@ -96,56 +98,37 @@ function PaypalCheckout({ addressInfo, showPayPal }: { addressInfo: any; showPay
   };
   const onApprove = (data: any, actions: any) => {
     return actions.order.capture().then(async function (details: any) {
-      // console.log("Transaction details in onApprove:", details);
-      const msg =
-        "Transaction completed by " +
-        details.payer.name.given_name +
-        ". Transaction ID: " +
-        details.id +
-        ". Payer ID: " +
-        details.payer.payer_id +
-        ". Payer Email: " +
-        details.payer.email_address +
-        ". Shipping Address: " +
-        details.purchase_units[0].shipping.address.address_line_1 +
-        ", " +
-        details.purchase_units[0].shipping.address.admin_area_2 +
-        ", " +
-        details.purchase_units[0].shipping.address.admin_area_1 +
-        ", " +
-        details.purchase_units[0].shipping.address.postal_code +
-        ", " +
-        details.purchase_units[0].shipping.address.country_code;
-      document.getElementById("loaded")!.innerHTML = "<h3>Thank you for your purchase!</h3>";
-      alert("✅ " + msg);
+      // Clear cart and navigate to success page with details
       clearCart();
-
-      console.log(details);
-      try {
-        const response = await fetch("https://formspree.io/f/mqagzpzj", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(details),
-        });
-        await response.json();
-        if (!response.ok) {
-          alert("❌ There was an error sending your information." + response.statusText);
+      // send details to formspree (fire-and-forget)
+      (async () => {
+        try {
+          const response = await fetch("https://formspree.io/f/mqagzpzj", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(details),
+          });
+          if (!response.ok) {
+            console.warn("Formspree returned non-ok status:", response.statusText);
+          }
+        } catch (err) {
+          console.warn("Failed to send order details to Formspree:", err);
         }
-      } catch (error) {
-        alert("⚠️ Network error. Please try again later." + error);
-      }
+      })();
+
+      // Navigate to order success page and pass details via state
+      navigate("/order-success", { state: { details } });
     });
   };
 
   const onError = (err: any) => {
     console.error("PayPal Checkout onError", err);
-    //alert("An error occurred during the transaction. Please try again.");
     alert(err.message || "⚠️An error occurred during the transaction. Please try again.");
   };
 
   const onCancel = (data: any, actions: any) => {
     console.log("PayPal Checkout cancelled" + data);
-    //TODO: send to order cancel page
+    alert("⚠️ The transaction was cancelled.");
   };
 
   return (

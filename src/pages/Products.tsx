@@ -7,12 +7,12 @@ import { useCart } from "../CartContext";
 import PhonePouchImage from "../images/UniversalPhonePouch.jpg";
 import ThreeDPrintedImg from "../images/keychain.jpg";
 
-const products: Product[] = [
+const productsList: Product[] = [
   {
     id: 1,
 
     name: "EMoto TrakPak/PhonePouch",
-    price: 9.99,
+    price: 10.0,
     imageUrl: PhonePouchImage,
     originalPrice: 15.99,
     discount: 31,
@@ -20,7 +20,7 @@ const products: Product[] = [
   {
     id: 2,
     name: "3D Printed Emoto Keychain - pack of 3",
-    price: 19.99,
+    price: 20.0,
     originalPrice: 29.99,
     discount: 33,
     popular: true,
@@ -31,15 +31,12 @@ const products: Product[] = [
 const Products: React.FC = () => {
   //const navigate = useNavigate();
   const { addItem } = useCart();
-  const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
+  const [quantities, setQuantities] = useState<Record<number, number>>({});
 
-  const handleQuantityChange = (productId: number, change: number) => {
-    setQuantities((prev) => ({
-      ...prev,
-      [productId]: Math.max(1, (prev[productId] || 1) + change),
-    }));
+  const handleQuantityChange = (productId: number, delta: number) => {
+    const newQty = (quantities[productId] || 1) + delta;
+    setQuantities((prev) => ({ ...prev, [productId]: Math.max(1, newQty) }));
   };
-
   const handleBuyNow = (prd: Product) => {
     const quantity = quantities[prd.id] || 1;
     addItem({ ...prd, quantity });
@@ -53,10 +50,7 @@ const Products: React.FC = () => {
         <div className="container">
           <div className="section-header">
             <h1 className="section-title">Our Products</h1>
-            <p className="section-subtitle">
-              Choose from our wide selection of moto products at unbeatable
-              prices
-            </p>
+            <p className="section-subtitle">Choose from our wide selection of moto products at unbeatable prices</p>
           </div>
         </div>
       </section>
@@ -65,7 +59,7 @@ const Products: React.FC = () => {
       <section className="py-5">
         <div className="container">
           <div className="row g-4">
-            {products.map((product) => (
+            {productsList.map((product) => (
               <div key={product.id} className="col-lg-4 col-md-6">
                 <div className="product-card h-100">
                   {product.popular && (
@@ -76,16 +70,10 @@ const Products: React.FC = () => {
                   )}
 
                   <div className="position-relative">
-                    <img
-                      src={product.imageUrl}
-                      alt={product.name}
-                      className="product-image"
-                    />
+                    <img src={product.imageUrl} alt={product.name} className="product-image" />
                     {product.discount && (
                       <div className="position-absolute top-0 start-0 m-3">
-                        <span className="badge bg-danger fs-6">
-                          -{product.discount}%
-                        </span>
+                        <span className="badge bg-danger fs-6">-{product.discount}%</span>
                       </div>
                     )}
                   </div>
@@ -95,9 +83,7 @@ const Products: React.FC = () => {
 
                     <div className="mt-auto">
                       <div className="d-flex align-items-center mb-3">
-                        <span className="product-price">
-                          ${product.price.toFixed(2)}
-                        </span>
+                        <span className="product-price">${product.price.toFixed(2)}</span>
                         {product.originalPrice && (
                           <span className="text-muted text-decoration-line-through ms-2">
                             ${product.originalPrice.toFixed(2)}
@@ -107,15 +93,12 @@ const Products: React.FC = () => {
 
                       {/* Quantity Selector */}
                       <div className="d-flex align-items-center justify-content-right mb-3">
-                        <label className="form-label me-2 mb-0">
-                          Quantity:
-                        </label>
+                        <label className="form-label me-2 mb-0">Quantity:</label>
                         <div className="input-group" style={{ width: "120px" }}>
                           <button
                             className="btn btn-outline-secondary btn-sm"
                             type="button"
-                            onClick={() => handleQuantityChange(product.id, -1)}
-                          >
+                            onClick={() => handleQuantityChange(product.id, -1)}>
                             -
                           </button>
                           <input
@@ -134,19 +117,15 @@ const Products: React.FC = () => {
                           <button
                             className="btn btn-outline-secondary btn-sm"
                             type="button"
-                            onClick={() => handleQuantityChange(product.id, 1)}
-                          >
+                            onClick={() => handleQuantityChange(product.id, 1)}>
                             +
                           </button>
                         </div>
                       </div>
 
-                      <button
-                        className="btn btn-buy"
-                        onClick={() => handleBuyNow(product)}
-                      >
+                      <button className="btn btn-buy" onClick={() => handleBuyNow(product)}>
                         <i className="fas fa-shopping-cart me-2"></i>
-                        Buy Now
+                        Add to Cart
                       </button>
                     </div>
                   </div>
@@ -165,14 +144,11 @@ const Products: React.FC = () => {
               <div className="text-center">
                 <div
                   className="bg-gradient-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
-                  style={{ width: "60px", height: "60px" }}
-                >
+                  style={{ width: "60px", height: "60px" }}>
                   <i className="fas fa-shipping-fast"></i>
                 </div>
                 <h5>Instant Delivery</h5>
-                <p className="text-muted small">
-                  Get your items delivered speedily after payment
-                </p>
+                <p className="text-muted small">Get your items delivered speedily after payment</p>
               </div>
             </div>
 
@@ -180,14 +156,11 @@ const Products: React.FC = () => {
               <div className="text-center">
                 <div
                   className="bg-gradient-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
-                  style={{ width: "60px", height: "60px" }}
-                >
+                  style={{ width: "60px", height: "60px" }}>
                   <i className="fas fa-lock"></i>
                 </div>
                 <h5>Secure Payment</h5>
-                <p className="text-muted small">
-                  All transactions are protected with SSL encryption
-                </p>
+                <p className="text-muted small">All transactions are protected with SSL encryption</p>
               </div>
             </div>
 
@@ -195,14 +168,11 @@ const Products: React.FC = () => {
               <div className="text-center">
                 <div
                   className="bg-gradient-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
-                  style={{ width: "60px", height: "60px" }}
-                >
+                  style={{ width: "60px", height: "60px" }}>
                   <i className="fas fa-headset"></i>
                 </div>
                 <h5>24/7 Support</h5>
-                <p className="text-muted small">
-                  Our support team is always here to help you
-                </p>
+                <p className="text-muted small">Our support team is always here to help you</p>
               </div>
             </div>
           </div>
@@ -215,9 +185,7 @@ const Products: React.FC = () => {
           <div className="row align-items-center">
             <div className="col-lg-8">
               <h3 className="mb-3">Ready to Make a Purchase?</h3>
-              <p className="text-muted mb-0">
-                Select your preferred package and proceed to secure checkout.
-              </p>
+              <p className="text-muted mb-0">Select your preferred package and proceed to secure checkout.</p>
             </div>
             <div className="col-lg-4 text-lg-end">
               <Link to="/cart" className="btn btn-primary btn-lg px-4 py-3">

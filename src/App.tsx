@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Products from "./pages/Products";
 import CartDisplay from "./pages/CartDisplay";
 import logo from "./images/logo.jpg";
+import OrderSuccess from "./pages/OrderSuccess";
 
 import "./coloshop-theme.css";
 import { CartProvider } from "./CartContext";
@@ -82,6 +83,7 @@ const App: React.FC = () => {
               <Route path="/" element={<Home />} />
               <Route path="/products" element={<Products />} />
               <Route path="/cart" element={<CartDisplay />} />
+              <Route path="/order-success" element={<OrderSuccess />} />
             </Routes>
           </main>
 

@@ -1,4 +1,3 @@
-
 export type Product = {
   id: number;
   name: string;
@@ -10,7 +9,6 @@ export type Product = {
   popular?: boolean;
 };
 
-
 export interface CartItem {
   id: number;
   name: string;
@@ -18,3 +16,6 @@ export interface CartItem {
   quantity: number;
   imageUrl?: string;
 }
+
+export const SHIPPING_COST = 8.99;
+export const TAX_RATE = 0.08;
