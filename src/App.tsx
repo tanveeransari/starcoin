@@ -3,10 +3,10 @@ import { HashRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import CartDisplay from "./pages/CartDisplay";
-import logo from "./images/logo.jpg";
+import logo from "./assets/images/logo.jpg";
 import OrderSuccess from "./pages/OrderSuccess";
 
-import "./coloshop-theme.css";
+import "./assets/css/coloshop-theme.css";
 import { CartProvider } from "./CartContext";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 

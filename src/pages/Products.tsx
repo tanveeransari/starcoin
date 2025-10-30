@@ -1,11 +1,11 @@
 // pages/Products.tsx
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Product } from "../types";
 import { useCart } from "../CartContext";
 
-import PhonePouchImage from "../images/UniversalPhonePouch.jpg";
-import ThreeDPrintedImg from "../images/keychain.jpg";
+import PhonePouchImage from "../assets/images/UniversalPhonePouch.jpg";
+import ThreeDPrintedImg from "../assets/images/keychain.jpg";
 
 const productsList: Product[] = [
   {

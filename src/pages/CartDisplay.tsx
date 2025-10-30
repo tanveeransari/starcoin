@@ -8,7 +8,7 @@ const CartDisplay: React.FC = () => {
   //const orderId = useId(); // Generate a unique order ID for this session. In a real application, you would likely want to generate this on the server side when the order is created
   const [showPaypal, setShowPaypal] = useState(false);
   const { cart, removeItem, clearCart } = useCart();
-  const [subtotal, totalAmount, taxAmount, shippingCost] = calculateCartTotals(cart);
+  const [, totalAmount, taxAmount, shippingCost] = calculateCartTotals(cart);
   //cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const GetNewOrderId = () => {
     return useId();
@@ -111,12 +111,12 @@ const CartDisplay: React.FC = () => {
 
                 <div className="d-flex justify-content-between align-items-center mb-1">
                   <h5 className="mb-0">Tax:</h5>
-                  <h4 className="text-gradient mb-0">${taxAmount.toFixed(2)}</h4>
+                  <h4 className="mb-0">${taxAmount.toFixed(2)}</h4>
                 </div>
 
                 <div className="d-flex justify-content-between align-items-center mb-3">
-                  <h5 className="mb-0">Shipping:</h5>
-                  <h4 className="text-gradient mb-0">${shippingCost.toFixed(2)}</h4>
+                  <h5 className="mb-1">Shipping:</h5>
+                  <h4 className="mb-1">${shippingCost.toFixed(2)}</h4>
                 </div>
                 <hr />
 
