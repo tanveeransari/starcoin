@@ -5,40 +5,33 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <script>window.SITE_NAME = "%REACT_APP_SITE_NAME%";
+    <script>
+      window.SITE_NAME = "%REACT_APP_SITE_NAME%";
       console.log(window.SITE_NAME + "SITE_NAME has been set just for learning purposes and isnt used in the app");
     </script>
     <meta
       name="description"
-      content="%REACT_APP_SITE_NAME% Savings - Your one-stop shop for discounted moto products"
-    />
+      content="%REACT_APP_SITE_NAME% Savings - Your one-stop shop for discounted moto products" />
 
     <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Font Awesome for icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+      rel="stylesheet" />
 
     <title>%REACT_APP_SITE_NAME% Savings - Premium Coin Store</title>
     <!-- PayPal SDK -->
     <!-- <script src="https://www.paypal.com/sdk/js?client-id=AaeIXQuycHuo5_MU0wL-fxHFMryKIVxoiWSMy00_XrSsfQXko8drG_0_A44kErKYlnCGRWqXDEJWRWvs&currency=USD&intent=capture"></script> -->
-    <script src="https://www.paypal.com/sdk/js?client-id=%REACT_APP_PAYPAL_CLIENT_ID%&currency=USD&intent=capture"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=__PP_CLIENT_ID__&currency=USD&intent=capture"></script>
   </head>
   <body>
-    <script>
+    <!-- <script>
       // PayPal SDK will use this global variable to determine the environment
       window.PAYPAL_CLIENT_ID = "%REACT_APP_PAYPAL_CLIENT_ID%";
-    </script>
+    </script> -->
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
