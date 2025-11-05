@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/starcoin/static/css/main.14aac9ca.css",
-    "main.js": "/starcoin/static/js/main.1795b7eb.js",
+    "main.js": "/starcoin/static/js/main.df4f0b3c.js",
     "static/js/453.45fd69f6.chunk.js": "/starcoin/static/js/453.45fd69f6.chunk.js",
     "static/media/UniversalPhonePouch.jpg": "/starcoin/static/media/UniversalPhonePouch.0f62aeab557f3f6fed64.jpg",
     "static/media/logo.jpg": "/starcoin/static/media/logo.9e439920efb85ce3dc13.jpg",
     "static/media/keychain.jpg": "/starcoin/static/media/keychain.cfdf7f4c549c0681a0d0.jpg",
     "index.html": "/starcoin/index.html",
     "main.14aac9ca.css.map": "/starcoin/static/css/main.14aac9ca.css.map",
-    "main.1795b7eb.js.map": "/starcoin/static/js/main.1795b7eb.js.map",
+    "main.df4f0b3c.js.map": "/starcoin/static/js/main.df4f0b3c.js.map",
     "453.45fd69f6.chunk.js.map": "/starcoin/static/js/453.45fd69f6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.14aac9ca.css",
-    "static/js/main.1795b7eb.js"
+    "static/js/main.df4f0b3c.js"
   ]
 }
