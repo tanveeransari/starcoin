@@ -14,11 +14,6 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
 
-    env:
-      #API_URL: ${{ secrets.API_URL }}
-      PP_CLIENT_ID: ${{ secrets.PP_CLIENT_ID }}
-      # add any other secrets you need
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -32,21 +27,19 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Inject secrets into source files
-        run: node scripts/inject-secrets.js
+      - name: Inject environment variables
+        run: |
+          echo "REACT_APP_PAYPAL_CLIENT_ID=${{ secrets.REACT_APP_PAYPAL_CLIENT_ID }}" >> $GITHUB_ENV
+
+      # (Optional) Replace manual placeholders like __API_URL__ or __API_KEY__
+      # This replaces them inside .tsx, .ts, or .html files
+      - name: Replace manual placeholders (optional)
+        run: |
+          find src public -type f \( -name "*.tsx" -o -name "*.ts" -o -name "*.html" \) \
+            -exec sed -i "s|__PAYPAL_CLIENT_ID__|${{ secrets.REACT_APP_PAYPAL_CLIENT_ID }}|g" {} +
 
       - name: Build the project
         run: npm run build
-
-      # # Optional sanity check — ensures no unreplaced placeholders remain
-      # - name: Verify injected files
-      #   run: |
-      #     if grep -R "__API_URL__" build/; then
-      #       echo "❌ Some placeholders weren't replaced."
-      #       exit 1
-      #     else
-      #       echo "✅ All placeholders replaced successfully."
-      #     fi
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

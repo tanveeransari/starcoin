@@ -12,7 +12,7 @@ import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 //const environment = process.env.ENVIRONMENT === "production" ? "production" : "sandbox";
 
-const clientId = "__PP_CLIENT_ID__"; //|| "";
+const clientId = process.env.REACT_APP_PAYPAL_CLIENT_ID || ""; //|| "";
 const initialOptions = {
   clientId: clientId,
   currency: "USD",
