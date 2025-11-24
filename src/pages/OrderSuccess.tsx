@@ -79,9 +79,6 @@ const OrderSuccess: React.FC = () => {
             <Link to="/" className="btn btn-primary me-2">
               Back to Home
             </Link>
-            <Link to="/products" className="btn btn-outline-primary">
-              Continue Shopping
-            </Link>
           </div>
         </div>
       </div>

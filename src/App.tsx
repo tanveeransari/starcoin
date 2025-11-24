@@ -9,6 +9,7 @@ import OrderSuccess from "./pages/OrderSuccess";
 import "./assets/css/coloshop-theme.css";
 import { CartProvider } from "./CartContext";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import varg from "./assets/images/varg.jpg";
 
 //const environment = process.env.ENVIRONMENT === "production" ? "production" : "sandbox";
 
@@ -61,12 +62,6 @@ const App: React.FC = () => {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/products">
-                      <i className="fas fa-shopping-bag me-1"></i>
-                      Products
-                    </Link>
-                  </li>
-                  <li className="nav-item">
                     <Link className="nav-link" to="/cart">
                       <i className="fas fa-shopping-cart me-1"></i>
                       Cart
@@ -80,8 +75,7 @@ const App: React.FC = () => {
           {/* Main Content */}
           <main style={{ marginTop: "80px" }}>
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/products" element={<Products />} />
+              <Route path="/" element={<Products />} />
               <Route path="/cart" element={<CartDisplay />} />
               <Route path="/order-success" element={<OrderSuccess />} />
             </Routes>
@@ -107,9 +101,6 @@ const App: React.FC = () => {
                       <Link to="/">Home</Link>
                     </li>
                     <li>
-                      <Link to="/products">Products</Link>
-                    </li>
-                    <li>
                       <Link to="/cart">Cart</Link>
                     </li>
                   </ul>
@@ -128,6 +119,10 @@ const App: React.FC = () => {
                     </li>
                   </ul>
                 </div>
+                <div className="col-lg-3 col-md-6 mb-4">
+                  <img src={varg} alt="motorcycle" style={{ height: 180, width: "auto", objectFit: "contain" }} />
+                </div>
+
                 {/* <div className="col-lg-3 col-md-6 mb-4">
                   <h5>Connect With Us</h5>
                   <div className="d-flex">
