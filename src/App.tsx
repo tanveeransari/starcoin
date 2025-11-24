@@ -61,12 +61,6 @@ const App: React.FC = () => {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/products">
-                      <i className="fas fa-shopping-bag me-1"></i>
-                      Products
-                    </Link>
-                  </li>
-                  <li className="nav-item">
                     <Link className="nav-link" to="/cart">
                       <i className="fas fa-shopping-cart me-1"></i>
                       Cart
@@ -80,8 +74,7 @@ const App: React.FC = () => {
           {/* Main Content */}
           <main style={{ marginTop: "80px" }}>
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/products" element={<Products />} />
+              <Route path="/" element={<Products />} />
               <Route path="/cart" element={<CartDisplay />} />
               <Route path="/order-success" element={<OrderSuccess />} />
             </Routes>
@@ -105,9 +98,6 @@ const App: React.FC = () => {
                   <ul className="list-unstyled">
                     <li>
                       <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                      <Link to="/products">Products</Link>
                     </li>
                     <li>
                       <Link to="/cart">Cart</Link>
