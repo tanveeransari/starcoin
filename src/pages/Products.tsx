@@ -45,15 +45,28 @@ const Products: React.FC = () => {
 
   return (
     <div>
-      {/* Hero Section */}
-      <section className="py-5 bg-light">
-        <div className="container">
-          <div className="section-header">
-            <h1 className="section-title">Our Products</h1>
-            <p className="section-subtitle">Choose from our wide selection of moto products at unbeatable prices</p>
-          </div>
-        </div>
-      </section>
+          {/* Hero Section */}
+          <section className="hero-section">
+            <div className="container">
+              <div className="hero-content fade-in-up">
+                <h1 className="hero-title">
+                  Welcome to{" "}
+                  <span className="text-gradient">
+                    {process.env.REACT_APP_SITE_NAME}
+                  </span>
+                </h1>
+                <p className="hero-subtitle">
+                  Your one-stop shop for discounted moto gear. Save more, ride more!
+                </p>
+                <div className="mt-4">
+                  <Link to="/cart" className="btn btn-outline-light btn-lg px-4 py-3">
+                    <i className="fas fa-shopping-cart me-2"></i>
+                    Quick Checkout
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </section>
 
       {/* Products Grid */}
       <section className="py-5">
