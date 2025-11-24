@@ -4,27 +4,27 @@ import { Link } from "react-router-dom";
 import { Product } from "../types";
 import { useCart } from "../CartContext";
 
-import PhonePouchImage from "../assets/images/UniversalPhonePouch.jpg";
-import ThreeDPrintedImg from "../assets/images/keychain.jpg";
+import Teeone from "../assets/images/unisex-jersey-short-sleeve-tee.jpg";
+import EmxHoodie1 from "../assets/images/emxhoodie1.jpg";
 
 const productsList: Product[] = [
   {
     id: 1,
 
-    name: "EMoto TrakPak/PhonePouch",
-    price: 10.0,
-    imageUrl: PhonePouchImage,
-    originalPrice: 15.99,
+    name: "E-MX Original Tee",
+    price: 50.67,
+    imageUrl: Teeone,
+    originalPrice: 60.99,
     discount: 31,
   },
   {
     id: 2,
-    name: "3D Printed Emoto Keychain - pack of 3",
-    price: 20.0,
-    originalPrice: 29.99,
+    name: "E-MX Original Hoodie",
+    price: 60.67,
+    originalPrice: 60.00,
     discount: 33,
     popular: true,
-    imageUrl: ThreeDPrintedImg,
+    imageUrl: EmxHoodie1,
   },
 ];
 
@@ -69,14 +69,19 @@ const Products: React.FC = () => {
                     </div>
                   )}
 
-                  <div className="position-relative">
-                    <img src={product.imageUrl} alt={product.name} className="product-image" />
-                    {product.discount && (
-                      <div className="position-absolute top-0 start-0 m-3">
-                        <span className="badge bg-danger fs-6">-{product.discount}%</span>
-                      </div>
-                    )}
-                  </div>
+                <div className="ratio ratio-1x1 bg-light">
+  <img
+    src={product.imageUrl}
+    alt={product.name}
+    className="img-fluid"
+    style={{ objectFit: "contain", padding: "20px" }}
+  />
+  {product.discount && (
+    <div className="position-absolute top-0 start-0 m-3">
+      <span className="badge bg-danger fs-6">-{product.discount}%</span>
+    </div>
+  )}
+</div>
 
                   <div className="card-body d-flex flex-column">
                     <h5 className="product-title">{product.name}</h5>
