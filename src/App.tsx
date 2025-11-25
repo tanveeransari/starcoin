@@ -1,6 +1,5 @@
 import React from "react";
 import { HashRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Home from "./pages/Home";
 import Products from "./pages/Products";
 import CartDisplay from "./pages/CartDisplay";
 import logo from "./assets/images/logo.jpg";
@@ -18,15 +17,7 @@ const initialOptions = {
   clientId: clientId,
   currency: "USD",
   intent: "capture",
-  //environment: environment,
-  // clientSecret: clientSecret1, // For server-side use only
-  // endpoint_url: "https://api-m.sandbox.paypal.com", //https://api-m.paypal.com for live
 };
-
-//console.log(initialOptions);
-// if (initialOptions.environment === "production") {
-//   initialOptions.endpoint_url = "https://api-m.paypal.com";
-// }
 
 const App: React.FC = () => {
   return (
@@ -44,10 +35,6 @@ const App: React.FC = () => {
                   className="me-2"
                 />
               </Link>
-              {/* <Link className="navbar-brand" to="/">
-                <i className="fas fa-coins me-2"></i>
-                {process.env.REACT_APP_SITE_NAME}
-              </Link> */}
 
               <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span className="navbar-toggler-icon"></span>
