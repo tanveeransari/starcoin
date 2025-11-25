@@ -1,18 +1,19 @@
 {
   "files": {
     "main.css": "/starcoin/static/css/main.de04a304.css",
-    "main.js": "/starcoin/static/js/main.016c0b09.js",
+    "main.js": "/starcoin/static/js/main.e3f7c69b.js",
     "static/js/453.45fd69f6.chunk.js": "/starcoin/static/js/453.45fd69f6.chunk.js",
+    "static/media/varg.jpg": "/starcoin/static/media/varg.dbe3e718d4589e1ff9bc.jpg",
     "static/media/unisex-jersey-short-sleeve-tee.jpg": "/starcoin/static/media/unisex-jersey-short-sleeve-tee.da6ce1d9abb598ce9a54.jpg",
     "static/media/logo.jpg": "/starcoin/static/media/logo.9e439920efb85ce3dc13.jpg",
     "static/media/emxhoodie1.jpg": "/starcoin/static/media/emxhoodie1.2b52084ac6329149d694.jpg",
     "index.html": "/starcoin/index.html",
     "main.de04a304.css.map": "/starcoin/static/css/main.de04a304.css.map",
-    "main.016c0b09.js.map": "/starcoin/static/js/main.016c0b09.js.map",
+    "main.e3f7c69b.js.map": "/starcoin/static/js/main.e3f7c69b.js.map",
     "453.45fd69f6.chunk.js.map": "/starcoin/static/js/453.45fd69f6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.de04a304.css",
-    "static/js/main.016c0b09.js"
+    "static/js/main.e3f7c69b.js"
   ]
 }
