@@ -12,16 +12,16 @@ const productsList: Product[] = [
     id: 1,
 
     name: "E-MX Original Tee",
-    price: 50.67,
+    price: 42.0,
     imageUrl: Teeone,
-    originalPrice: 60.99,
+    originalPrice: 50.0,
     discount: 31,
   },
   {
     id: 2,
     name: "E-MX Original Hoodie",
     price: 60.67,
-    originalPrice: 60.00,
+    originalPrice: 75.99,
     discount: 33,
     popular: true,
     imageUrl: EmxHoodie1,
@@ -61,28 +61,23 @@ const handleBuyNow = (prd: Product) => {
 
   return (
     <div>
-          {/* Hero Section */}
-          <section className="hero-section">
-            <div className="container">
-              <div className="hero-content fade-in-up">
-                <h1 className="hero-title">
-                  Welcome to{" "}
-                  <span className="text-gradient">
-                    {process.env.REACT_APP_SITE_NAME}
-                  </span>
-                </h1>
-                <p className="hero-subtitle">
-                  Your one-stop shop for discounted moto gear. Save more, ride more!
-                </p>
-                <div className="mt-4">
-                  <Link to="/cart" className="btn btn-outline-light btn-lg px-4 py-3">
-                    <i className="fas fa-shopping-cart me-2"></i>
-                    Quick Checkout
-                  </Link>
-                </div>
-              </div>
+      {/* Hero Section */}
+      <section className="hero-section">
+        <div className="container">
+          <div className="hero-content fade-in-up">
+            <h1 className="hero-title">
+              Welcome to <span className="text-gradient">{process.env.REACT_APP_SITE_NAME}</span>
+            </h1>
+            <p className="hero-subtitle">Your one-stop shop for discounted moto gear. Save more, ride more!</p>
+            <div className="mt-4">
+              <Link to="/cart" className="btn btn-outline-light btn-lg px-4 py-3">
+                <i className="fas fa-shopping-cart me-2"></i>
+                Quick Checkout
+              </Link>
             </div>
-          </section>
+          </div>
+        </div>
+      </section>
 
       {/* Products Grid */}
       <section className="py-5">
@@ -98,19 +93,19 @@ const handleBuyNow = (prd: Product) => {
                     </div>
                   )}
 
-                <div className="ratio ratio-1x1 bg-light">
-  <img
-    src={product.imageUrl}
-    alt={product.name}
-    className="img-fluid"
-    style={{ objectFit: "contain", padding: "20px" }}
-  />
-  {product.discount && (
-    <div className="position-absolute top-0 start-0 m-3">
-      <span className="badge bg-danger fs-6">-{product.discount}%</span>
-    </div>
-  )}
-</div>
+                  <div className="ratio ratio-1x1 bg-light">
+                    <img
+                      src={product.imageUrl}
+                      alt={product.name}
+                      className="img-fluid"
+                      style={{ objectFit: "contain", padding: "20px" }}
+                    />
+                    {product.discount && (
+                      <div className="position-absolute top-0 start-0 m-3">
+                        <span className="badge bg-danger fs-6">-{product.discount}%</span>
+                      </div>
+                    )}
+                  </div>
 
                   <div className="card-body d-flex flex-column">
                     <h5 className="product-title">{product.name}</h5>
