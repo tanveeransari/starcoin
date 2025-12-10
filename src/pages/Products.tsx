@@ -37,11 +37,27 @@ const Products: React.FC = () => {
     const newQty = (quantities[productId] || 1) + delta;
     setQuantities((prev) => ({ ...prev, [productId]: Math.max(1, newQty) }));
   };
-  const handleBuyNow = (prd: Product) => {
-    const quantity = quantities[prd.id] || 1;
-    addItem({ ...prd, quantity });
-    //navigate("/cart");
-  };
+const handleBuyNow = (prd: Product) => {
+  const quantity = quantities[prd.id] || 1;
+  addItem({ ...prd, quantity });
+
+  const button = document.activeElement as HTMLElement;
+  if (!button) return;
+
+  // Change button to success state
+  const originalText = button.innerHTML;
+  button.innerHTML = `<i class="fas fa-check me-2"></i>Added!`;
+  button.classList.add('btn-success');
+  button.setAttribute('disabled', 'true');
+
+  // Cleanup after animation
+  setTimeout(() => {
+    // Revert button
+    button.innerHTML = originalText;
+    button.classList.remove('btn-success');
+    button.removeAttribute('disabled');
+  }, 900);
+};
 
   return (
     <div>
